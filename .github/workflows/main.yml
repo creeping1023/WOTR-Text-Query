@@ -24,7 +24,7 @@ jobs:
 
     - name: Build project
       run: |
-        echo "PUBLIC_URL=." > .env
+        echo "PUBLIC_URL=/${{ github.repository }}" > .env
         npm run build
 
     - name: Deploy to GitHub Pages
