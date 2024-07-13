@@ -1,0 +1,36 @@
+#root{
+  font-size: 24px;
+  font-family: 华文中宋,Times;
+}
+.g{
+  color: darkviolet;
+}
+.n{
+  color: #777;
+}
+.d{
+  color: dodgerblue;
+}
+strong{
+  /*font-weight: bold;
+  color: orange;*/
+  font-weight: normal;
+  border: 1px dashed;
+  border-radius: 3px;
+  background-color: rgba(0,0,0,5%);
+}
+.result{
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+.result:hover{
+  border-color: #000;
+}
+.result-list{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

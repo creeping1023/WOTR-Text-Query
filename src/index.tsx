@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Home from './Home';
+import Results from './Results';
+import Entity from './Entity';
+import String from './String';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +13,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/results' element={<Results/>}></Route>
+        <Route path='/entity/:id' element={<Entity/>}></Route>
+        <Route path='/string/:id' element={<String/>}></Route>
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
