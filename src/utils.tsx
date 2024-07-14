@@ -18,5 +18,6 @@ export function ParseStringToHtml(val:string, highlight?:string){
 export function ParsePlainText(val:string){
   return val
     .replaceAll(/\{(?<tag>[a-z])(?:\|[a-zA-Z0-9:_]+)?\}(?<content>.*?)\{\/\k<tag>\}/g, '$<content>')
-    .replaceAll(/<(?<tag>[a-z])>(?<content>.*?)<\/\k<tag>>/g, '$<content>');
+    .replaceAll(/<(?<tag>[a-z])>(?<content>.*?)<\/\k<tag>>/g, '$<content>')
+    .replaceAll('\\n', '');
 }

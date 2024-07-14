@@ -20,7 +20,10 @@ function Results() {
   const paramValue = searchParams.get('search') || '';
   let results: [uuid,string][] = [];
   if (paramValue){
-    results = Object.entries(cnLocalization.strings).filter(([k,v])=>ParsePlainText(v).includes(paramValue));
+    const terms = paramValue.split(/\s+/);
+    results = Object.entries(cnLocalization.strings).filter(([k,v])=>
+      terms.every(term => ParsePlainText(v).includes(term))
+    );
   }
   return (
     <div style={{

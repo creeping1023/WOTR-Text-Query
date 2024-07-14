@@ -15,11 +15,11 @@ function Home() {
   const submit = () => {
     if (!inputValue) return;
     const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set('search', inputValue);
+    newParams.set('search', inputValue.replace(/\s+/, ' '));
     navigate(`/results?${newParams.toString()}`);
   }
   const handleKeyPress = (e: React.KeyboardEvent ) => {
-    if (e.key === 'Enter'){
+    if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey && !e.altKey){
       e.preventDefault();
       submit();
     }
