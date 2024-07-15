@@ -1,24 +1,17 @@
 import React from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
-import {ParseStringToHtml} from './utils'
-import { Localization, uuid } from './types'
-import cn from './Localization/zhCN.json'
-import en from './Localization/enGB.json'
-import sound from './Localization/Sound.json'
-const cnLocalization = cn as Localization;
-const enLocalization = en as Localization;
-const soundLocalization = sound as Localization;
+import { ParseStringToHtml, lang } from './utils'
 
 function Item(val:string){
   return <p dangerouslySetInnerHTML={{__html:ParseStringToHtml(val || '')}}></p>;
 }
-function MultiLanguage(id:uuid){
+function MultiLanguage(id:string){
   const list: JSX.Element[] = [];
   list.push(Item(id));
-  if (cnLocalization.strings[id]) list.push(Item(cnLocalization.strings[id]));
-  if (enLocalization.strings[id]) list.push(Item(enLocalization.strings[id]));
-  if (soundLocalization.strings[id]) list.push(Item(soundLocalization.strings[id]));
+  if (lang.cn![id]) list.push(Item(lang.cn![id]!));
+  if (lang.en![id]) list.push(Item(lang.en![id]!));
+  if (lang.sound![id]) list.push(Item(lang.sound![id]!));
   return list;
 }
 
