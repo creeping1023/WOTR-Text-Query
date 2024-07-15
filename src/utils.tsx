@@ -19,30 +19,33 @@ export const path2uuid = path2uuidRaw as Record<string, uuid[] | undefined>;
 
 export const config = {
   title: '正义之怒文本查询',
+  debug: process.env.NODE_ENV === "development",
 };
+
+function recursiveReplace(s:string, pattern:RegExp, repl:string):string{
+  if (!pattern.test(s)) return s;
+  s = s.replaceAll(pattern, repl);
+  return recursiveReplace(s, pattern, repl);
+}
 
 /**
  * 转换为HTML格式
  */
-export function ParseStringToHtml(val:string, highlight?:string){
-    val = val
-      .replaceAll(/\{g\|([^}]+)\}(.*?)\{\/g\}/g, '<span class="g" title="$1">$2</span>')
-      .replaceAll(/\{d\|([^}]+)\}(.*?)\{\/d\}/g, '<span class="d" title="$1">$2</span>')
-      .replaceAll(/\{n\}(.*?)\{\/n\}/g, '<span class="n">$1</span>')
-    /*if (highlight){
-      val = val.replace(highlight, '<strong>'+highlight+'</strong>');
-    }*/
-    return val;
+export function ParseStringToHtml(s:string){
+  s = recursiveReplace(s, /\{g\|([^}]+)\}(.*?)\{\/g\}/g, '<span class="g" title="$1">$2</span>');
+  s = recursiveReplace(s, /\{d\|([^}]+)\}(.*?)\{\/d\}/g, '<span class="d" title="$1">$2</span>');
+  s = recursiveReplace(s, /\{n\}(.*?)\{\/n\}/g, '<span class="n">$1</span>');
+  return s;
 }
 
 /**
  * 去除特殊标记，用于查找
  */
-export function ParsePlainText(val:string){
-  return val
-    .replaceAll(/\{(?<tag>[a-z])(?:\|[a-zA-Z0-9:_]+)?\}(?<content>.*?)\{\/\k<tag>\}/g, '$<content>')
-    .replaceAll(/<(?<tag>[a-z])>(?<content>.*?)<\/\k<tag>>/g, '$<content>')
-    .replaceAll('\\n', '');
+export function ParsePlainText(s:string){
+  s = s.replaceAll('\n', '');
+  s = recursiveReplace(s, /\{(?<tag>[a-z])(?:\|[a-zA-Z0-9:_ ]+)?\}(?<content>.*?)\{\/\k<tag>\}/g, '$<content>');
+  s = recursiveReplace(s, /<(?<tag>[a-z])>(?<content>.*?)<\/\k<tag>>/g, '$<content>');
+  return s;
 }
 
 export function GetAudioUrl(id:uuid){

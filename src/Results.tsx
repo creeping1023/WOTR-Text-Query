@@ -5,9 +5,10 @@ import { ParseStringToHtml, ParsePlainText, uuid2path, lang, config } from './ut
 import { Helmet } from "react-helmet";
 function Item(id:string, val:string, highlight:string){
   const path = uuid2path[id];
-  val = ParseStringToHtml(val, highlight);
-  if (!path) return <Link to={'/string/'+id} className='result' key={id} dangerouslySetInnerHTML={{__html:val}}></Link>
-  return <Link to={'/entity/'+(path||'').replaceAll('/', '~')} className='result' key={id} dangerouslySetInnerHTML={{__html:val}}></Link>
+  return <Link to={path ? ('/entity/'+(path||'').replaceAll('/', '~')) : ('/string/'+id)}
+    data-raw={config.debug ? val : false}
+    data-plain={config.debug ? ParsePlainText(val) : false}
+    className='result' key={id} dangerouslySetInnerHTML={{__html:ParseStringToHtml(val)}}></Link>
 }
 
 function Results() {
