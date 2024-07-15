@@ -1,13 +1,13 @@
-import cn from './Localization/zhCN.json'
-import en from './Localization/enGB.json'
-import sound from './Localization/Sound.json'
+import cn from './Localization/zhCN.json';
+import en from './Localization/enGB.json';
+import sound from './Localization/Sound.json';
 import path2uuidRaw from './Data/path2uuid.json';
-import uuid2pathRaw from './Data/uuid2path.json'
+import uuid2pathRaw from './Data/uuid2path.json';
 
 export type uuid = string;
 export type Localization = {
     strings: Record<uuid, string | undefined>
-}
+};
 
 export const lang: Record<string, Record<string, string | undefined> | undefined> = {
   cn: (cn as Localization).strings,
@@ -16,6 +16,10 @@ export const lang: Record<string, Record<string, string | undefined> | undefined
 }
 export const uuid2path = uuid2pathRaw as Record<uuid, string | undefined>;
 export const path2uuid = path2uuidRaw as Record<string, uuid[] | undefined>;
+
+export const config = {
+  title: '正义之怒文本查询',
+};
 
 /**
  * 转换为HTML格式

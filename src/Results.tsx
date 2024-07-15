@@ -1,7 +1,8 @@
 import React from 'react';
 import './Global.css'
 import { Link, useSearchParams } from 'react-router-dom';
-import { ParseStringToHtml, ParsePlainText, uuid2path, lang } from './utils'
+import { ParseStringToHtml, ParsePlainText, uuid2path, lang, config } from './utils'
+import { Helmet } from "react-helmet";
 function Item(id:string, val:string, highlight:string){
   const path = uuid2path[id];
   val = ParseStringToHtml(val, highlight);
@@ -23,6 +24,9 @@ function Results() {
     <div style={{
       display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
       height:'100vh',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
+        <Helmet>
+          <title>搜索结果 - {config.title}</title>
+        </Helmet>
         <span>共{results.length}项关于[{paramValue}]的结果</span>
         <Link to={'/'}>返回首页</Link>
         <div className='result-list'>{results.map(([k,v])=> Item(k, v, paramValue))}</div>

@@ -3,6 +3,8 @@ import './Global.css';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Helmet } from "react-helmet";
+import { config } from "./utils";
 const { TextArea } = Input;
 
 function Home() {
@@ -28,6 +30,9 @@ function Home() {
     <div style={{
       display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',gap:'10px',
       height:'100vh',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
+        <Helmet>
+          <title>{config.title}</title>
+        </Helmet>
         <TextArea placeholder="input search text" allowClear onChange={handleChange} onKeyDown={handleKeyPress} autoFocus
           size="large" autoSize={{ minRows: 1, maxRows: 6 }} style={{maxWidth:'800px'}} />
         <Button type="primary" icon={<SearchOutlined />} onClick={submit} disabled={!inputValue}>查找</Button>

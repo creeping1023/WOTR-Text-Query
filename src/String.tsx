@@ -1,7 +1,8 @@
 import React from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
-import { ParseStringToHtml, lang, GetAudioUrl } from './utils'
+import { ParseStringToHtml, lang, GetAudioUrl, config } from './utils'
+import { Helmet } from "react-helmet";
 
 function Item(val:string){
   return <p dangerouslySetInnerHTML={{__html:ParseStringToHtml(val || '')}}></p>;
@@ -25,6 +26,9 @@ function Entity() {
     <div style={{
       display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
       height:'100vh',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
+        <Helmet>
+          <title>{uuid} - {config.title}</title>
+        </Helmet>
         <Link to={'/'}>返回首页</Link>
         {results}
     </div>
