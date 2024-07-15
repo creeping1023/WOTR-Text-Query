@@ -34,3 +34,6 @@ strong{
   flex-direction: column;
   gap: 1em;
 }
+.break-inline>*{
+  display: inline-block;
+}

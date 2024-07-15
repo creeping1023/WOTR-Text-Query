@@ -20,7 +20,7 @@ function Entity() {
   let results: JSX.Element[] = [];
   const path = (useParams().id ?? '').replaceAll('~', '/');
   if (path){
-    results.push(Item(path));
+    results.push(<p className='break-inline'>{path.split(/(?<=\/)|(?=\/)/).map(term=><span>{term}</span>)}</p>);
     const idList = path2uuid[path] ?? [];
     idList.forEach(id => {
       results = results.concat(MultiLanguage(id));
