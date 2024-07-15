@@ -1,7 +1,7 @@
 import React from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
-import { ParseStringToHtml, lang, GetAudioUrl, config } from './utils'
+import { ParseStringToHtml, lang, GetAudios, config } from './utils'
 import { Helmet } from "react-helmet";
 
 function Item(val:string){
@@ -12,7 +12,7 @@ function MultiLanguage(id:string){
   list.push(Item(id));
   if (lang.cn![id]) list.push(Item(lang.cn![id]!));
   if (lang.en![id]) list.push(Item(lang.en![id]!));
-  if (lang.sound![id]) list.push(GetAudioUrl(id)!);
+  if (lang.sound![id]) GetAudios(id).forEach(o => list.push(o));
   return list;
 }
 

@@ -37,3 +37,14 @@ strong{
 .break-inline>*{
   display: inline-block;
 }
+audio{
+  min-height: 50px;
+}
+.audio-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
