@@ -1,7 +1,7 @@
 import React from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
-import { ParseStringToHtml, lang, path2uuid } from './utils'
+import { GetAudioUrl, ParseStringToHtml, lang, path2uuid } from './utils'
 
 function Item(val:string){
   return <p dangerouslySetInnerHTML={{__html:ParseStringToHtml(val || '')}}></p>;
@@ -11,7 +11,7 @@ function MultiLanguage(id:string){
   list.push(Item(id));
   if (lang.cn![id]) list.push(Item(lang.cn![id]!));
   if (lang.en![id]) list.push(Item(lang.en![id]!));
-  if (lang.sound![id]) list.push(Item(lang.sound![id]!));
+  if (lang.sound![id]) list.push(GetAudioUrl(id)!);
   return list;
 }
 

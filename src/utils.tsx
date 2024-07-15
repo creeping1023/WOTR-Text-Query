@@ -40,3 +40,11 @@ export function ParsePlainText(val:string){
     .replaceAll(/<(?<tag>[a-z])>(?<content>.*?)<\/\k<tag>>/g, '$<content>')
     .replaceAll('\\n', '');
 }
+
+export function GetAudioUrl(id:uuid){
+  const name = lang.sound![id];
+  if (name) return (<audio controls>
+    <source src={'https://creeping1023.github.io/WOTR-Dialogues-Audio/dest/' + name + '.aac'} type="audio/aac" />
+    Your browser does not support the audio element.
+  </audio>)
+}
