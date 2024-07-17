@@ -1,11 +1,11 @@
 import React from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
-import { ParseStringToHtml, lang, GetAudios, config } from './utils'
+import { ParseStringToNodes, lang, GetAudios, config } from './utils'
 import { Helmet } from "react-helmet-async";
 
 function Item(val:string){
-  return <p dangerouslySetInnerHTML={{__html:ParseStringToHtml(val || '')}}></p>;
+  return <p>{ParseStringToNodes(val)}</p>;
 }
 function MultiLanguage(id:string){
   const list: JSX.Element[] = [];

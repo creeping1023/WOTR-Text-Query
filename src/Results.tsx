@@ -1,14 +1,16 @@
 import React from 'react';
 import './Global.css'
 import { Link, useSearchParams } from 'react-router-dom';
-import { ParseStringToHtml, ParsePlainText, uuid2path, lang, config } from './utils'
+import { ParseStringToNodes, ParsePlainText, uuid2path, lang, config } from './utils'
 import { Helmet } from "react-helmet-async";
 function Item(id:string, val:string, highlight:string){
   const path = uuid2path[id];
   return <Link to={path ? ('/entity/'+(path||'').replaceAll('/', '~')) : ('/string/'+id)}
     data-raw={config.debug ? val : false}
     data-plain={config.debug ? ParsePlainText(val) : false}
-    className='result' key={id} dangerouslySetInnerHTML={{__html:ParseStringToHtml(val)}}></Link>
+    className='result' key={id}>
+      {ParseStringToNodes(val)}
+    </Link>
 }
 
 function Results() {
