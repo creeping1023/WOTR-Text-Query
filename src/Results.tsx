@@ -2,7 +2,7 @@ import React from 'react';
 import './Global.css'
 import { Link, useSearchParams } from 'react-router-dom';
 import { ParseStringToHtml, ParsePlainText, uuid2path, lang, config } from './utils'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 function Item(id:string, val:string, highlight:string){
   const path = uuid2path[id];
   return <Link to={path ? ('/entity/'+(path||'').replaceAll('/', '~')) : ('/string/'+id)}

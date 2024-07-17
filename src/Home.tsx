@@ -3,7 +3,7 @@ import './Global.css';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { config } from "./utils";
 const { TextArea } = Input;
 

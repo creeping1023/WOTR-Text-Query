@@ -2,7 +2,7 @@ import React from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
 import { GetAudios, ParseStringToHtml, lang, path2uuid, config } from './utils'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 function Item(val:string){
   return <p dangerouslySetInnerHTML={{__html:ParseStringToHtml(val || '')}}></p>;

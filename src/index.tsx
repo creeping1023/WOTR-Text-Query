@@ -7,20 +7,23 @@ import Entity from './Entity';
 import String from './String';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Router basename={process.env.PUBLIC_URL}>
-      <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/results' element={<Results/>}></Route>
-        <Route path='/entity/:id' element={<Entity/>}></Route>
-        <Route path='/string/:id' element={<String/>}></Route>
-      </Routes>
-    </Router>
+    <HelmetProvider>
+      <Router basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path='/' element={<Home/>}></Route>
+          <Route path='/results' element={<Results/>}></Route>
+          <Route path='/entity/:id' element={<Entity/>}></Route>
+          <Route path='/string/:id' element={<String/>}></Route>
+        </Routes>
+      </Router>
+    </HelmetProvider>
   </React.StrictMode>
 );
 
