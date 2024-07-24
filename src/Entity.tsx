@@ -1,42 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Global.css'
 import { Link, useParams } from 'react-router-dom';
-import { GetAudios, ParseStringToNodes, lang, path2uuid, config } from './utils'
+import { ContainerWithTitle, MultiLanguage, GetRelationJson, path2uuid, config } from './utils'
 import { Helmet } from "react-helmet-async";
 
-function Item(val:string){
-  return <p>{ParseStringToNodes(val)}</p>;
+function SplitedLongString(text:string){
+  return text.split(/(?<=\/)|(?=\/)/).map((term, i)=><span key={i}>{term}</span>);
 }
-function MultiLanguage(id:string){
-  const list: JSX.Element[] = [];
-  list.push(Item(id));
-  if (lang.cn![id]) list.push(Item(lang.cn![id]!));
-  if (lang.en![id]) list.push(Item(lang.en![id]!));
-  if (lang.sound![id]) GetAudios(id).forEach(o => list.push(o));
-  console.log(list);
-  return list;
+
+function DumpRelation(relationData:Record<string, string[]>|null){
+  if (!relationData) return [];
+  return [['parents', '前文'], ['children', '后文']].filter(([key, title])=>relationData[key]).map(([key, title], index) =>{
+    const list = relationData[key];
+    list.sort();
+    return ContainerWithTitle(
+      title,
+      list.map((path, i)=><p key={i}>
+        <Link to={'/entity/'+path.replaceAll('/','~')+'.jbp'} className='break-inline'>
+          {SplitedLongString(path.replaceAll('~', '/'))}
+        </Link>
+      </p>),
+      index
+    );
+  });
 }
 
 function Entity() {
-  let results: JSX.Element[] = [];
-  const path = (useParams().id ?? '').replaceAll('~', '/');
-  if (path){
-    results.push(<p className='break-inline'>{path.split(/(?<=\/)|(?=\/)/).map(term=><span>{term}</span>)}</p>);
-    const idList = path2uuid[path] ?? [];
-    idList.forEach(id => {
-      results = results.concat(MultiLanguage(id));
-    });
-  }
+  const path = (useParams().id ?? '');
+
+  const [relationData, setRelationData] = useState(null as Record<string, string[]>|null);
+  useEffect(() => {
+    if (path) {
+      GetRelationJson(path).then(data => {
+        setRelationData(data);
+      }).catch(e => {
+        console.warn(e);
+        setRelationData({});
+      });
+    }
+  }, [path]);
+
   return (
-    <div style={{
+    <main style={{
       display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
       height:'100vh',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
         <Helmet>
-          <title>{path} - {config.title}</title>
+          <title>{path.replaceAll('~', '/')} - {config.title}</title>
         </Helmet>
         <Link to={'/'}>返回首页</Link>
-        {results}
-    </div>
+        {path && <h2 className='break-inline'>{SplitedLongString(path.replaceAll('~', '/').replace(/\.jbp$/, ''))}</h2>}
+        {path && (path2uuid[path.replaceAll('~', '/')] ?? []).map((id, index) => MultiLanguage(id, index))}
+        {path ? DumpRelation(relationData) : 'loading...'}
+    </main>
   );
 }
 

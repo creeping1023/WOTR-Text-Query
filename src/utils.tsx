@@ -101,21 +101,48 @@ export function ParsePlainText(s:string){
   // return s.replaceAll(regex, '$<content>'); // 75ms
 }
 
-function AudioNameToComponent(name:string){
-  return (<p className='audio-container'>
-    <span>{name}</span>
-    <audio controls>
-      <source src={'https://creeping1023.github.io/WOTR-Dialogues-Audio/dest/' + name + '.aac'} type="audio/aac" />
-      Your browser does not support the audio element.
-    </audio>
-  </p>);
-}
-
 export function GetAudios(id:uuid){
   const eventName = lang.sound![id];
   if (eventName) {
     const names = soundSwitch[eventName] ?? [eventName];
-    return names.map(AudioNameToComponent);
+    // 这里的key必须是唯一的，以避免页面切换时音频不更新
+    return names.map((name, index) => <p className='audio-container' key={name}>
+      <span>{name}</span>
+      <audio controls>
+        <source src={'https://creeping1023.github.io/WOTR-Dialogues-Audio/dest/' + name + '.aac'} type="audio/aac" />
+        Your browser does not support the audio element.
+      </audio>
+    </p>);
   }
   return [];
+}
+
+export async function GetRelationJson(path:string){
+  if (!path) return null;
+  const url = 'https://creeping1023.github.io/WOTR-BluePrint-Relation/data/' + path.replace(/\.jbp$/, '.json');
+  return (await fetch(url)).json();
+}
+
+
+export function Item(val:string, key?:React.Key){
+  return <p key={key}>{ParseStringToNodes(val)}</p>;
+}
+
+export function ContainerWithTitle(title:React.ReactNode, items:React.ReactNode, key?:React.Key){
+  return <article className='flex-column' key={key}>
+    <h3>{title}</h3>
+    <div className='flex-column'>{items}</div>
+  </article>
+}
+
+export function MultiLanguage(id:string, key?:React.Key){
+  const list: JSX.Element[] = [];
+  if (lang.cn![id]) list.push(Item(lang.cn![id]!, -1));
+  if (lang.en![id]) list.push(Item(lang.en![id]!, -2));
+  if (lang.sound![id]) GetAudios(id).forEach(o => list.push(o));
+  return ContainerWithTitle(
+    Item(id),
+    list,
+    key
+  );
 }
