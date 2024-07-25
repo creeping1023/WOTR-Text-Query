@@ -8,6 +8,8 @@ import String from './String';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from "react-helmet-async";
+import { FloatButton } from "antd";
+import { ArrowUpOutlined } from '@ant-design/icons';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,6 +25,7 @@ root.render(
           <Route path='/string/:id' element={<String/>}></Route>
         </Routes>
       </Router>
+      <FloatButton.BackTop visibilityHeight={window.innerHeight/2} duration={450} icon={<ArrowUpOutlined />} />
     </HelmetProvider>
   </React.StrictMode>
 );
