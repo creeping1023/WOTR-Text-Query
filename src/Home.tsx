@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Global.css';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 import { useNavigate, useSearchParams } from 'react-router-dom';

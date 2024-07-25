@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Global.css'
 import { Link, useParams } from 'react-router-dom';
 import { ContainerWithTitle, MultiLanguage, GetRelationJson, path2uuid, config } from './utils'
 import { Helmet } from "react-helmet-async";

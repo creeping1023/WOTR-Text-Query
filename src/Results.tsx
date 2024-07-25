@@ -1,5 +1,4 @@
 import React from 'react';
-import './Global.css'
 import { Link, useSearchParams } from 'react-router-dom';
 import { ParseStringToNodes, ParsePlainText, uuid2path, lang, config } from './utils'
 import { Helmet } from "react-helmet-async";
