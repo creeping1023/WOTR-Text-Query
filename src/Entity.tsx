@@ -40,17 +40,16 @@ function Entity() {
   }, [path]);
 
   return (
-    <main style={{
+    <div style={{
       display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
-      height:'100vh',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
+      height: '100%',width:'100vw',padding:'0 50px',boxSizing:'border-box'}}>
         <Helmet>
           <title>{path.replaceAll('~', '/')} - {config.title}</title>
         </Helmet>
-        <Link to={'/'}>返回首页</Link>
         {path && <h2 className='break-inline'>{SplitedLongString(path.replaceAll('~', '/').replace(/\.jbp$/, ''))}</h2>}
         {path && (path2uuid[path.replaceAll('~', '/')] ?? []).map((id, index) => MultiLanguage(id, index))}
         {path ? DumpRelation(relationData) : 'loading...'}
-    </main>
+    </div>
   );
 }
 

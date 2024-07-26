@@ -23,16 +23,15 @@ function Results() {
     );
   }
   return (
-    <main style={{
+    <div style={{
       display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
-      height:'100vh',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
+      height: '100%',width:'100vw',padding:'0 50px',boxSizing:'border-box'}}>
         <Helmet>
           <title>搜索结果 - {config.title}</title>
         </Helmet>
-        <span>共{results.length}项关于[{paramValue}]的结果</span>
-        <Link to={'/'}>返回首页</Link>
-        <div className='result-list'>{results.map(([k,v])=> Item(k, v, paramValue))}</div>
-    </main>
+        <h2>共{results.length}项关于[{paramValue}]的结果</h2>
+        <section className='result-list'>{results.map(([k,v])=> Item(k, v, paramValue))}</section>
+    </div>
   );
 }
 
