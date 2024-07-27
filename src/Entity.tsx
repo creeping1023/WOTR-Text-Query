@@ -9,7 +9,7 @@ function SplitedLongString(text:string){
 
 function DumpRelation(relationData:Record<string, string[]>|null){
   if (!relationData) return [];
-  return [['parents', '前文'], ['children', '后文']].filter(([key, title])=>relationData[key]).map(([key, title], index) =>{
+  return [['parents', '被引用'], ['children', '引用']].filter(([key, title])=>relationData[key]).map(([key, title], index) =>{
     const list = relationData[key];
     list.sort();
     return ContainerWithTitle(
