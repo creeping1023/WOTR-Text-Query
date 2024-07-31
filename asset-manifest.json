@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/WOTR-Text-Query/static/css/main.6bcd0a96.css",
-    "main.js": "/WOTR-Text-Query/static/js/main.1b72692c.js",
+    "main.css": "/WOTR-Text-Query/static/css/main.a8fe64f8.css",
+    "main.js": "/WOTR-Text-Query/static/js/main.0a37f86a.js",
     "static/js/453.2fff484e.chunk.js": "/WOTR-Text-Query/static/js/453.2fff484e.chunk.js",
     "index.html": "/WOTR-Text-Query/index.html",
-    "main.6bcd0a96.css.map": "/WOTR-Text-Query/static/css/main.6bcd0a96.css.map",
-    "main.1b72692c.js.map": "/WOTR-Text-Query/static/js/main.1b72692c.js.map",
+    "main.a8fe64f8.css.map": "/WOTR-Text-Query/static/css/main.a8fe64f8.css.map",
+    "main.0a37f86a.js.map": "/WOTR-Text-Query/static/js/main.0a37f86a.js.map",
     "453.2fff484e.chunk.js.map": "/WOTR-Text-Query/static/js/453.2fff484e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6bcd0a96.css",
-    "static/js/main.1b72692c.js"
+    "static/css/main.a8fe64f8.css",
+    "static/js/main.0a37f86a.js"
   ]
 }
