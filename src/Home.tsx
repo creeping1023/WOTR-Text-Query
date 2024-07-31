@@ -28,9 +28,7 @@ function Home() {
     }
   }
   return (
-    <div style={{
-      display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',gap:'10px',
-      height: '100%',width:'100vw',padding:'50px',boxSizing:'border-box'}}>
+    <div className="component-container">
         <Helmet>
           <title>{config.title}</title>
         </Helmet>

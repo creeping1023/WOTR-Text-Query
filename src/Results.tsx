@@ -23,9 +23,7 @@ function Results() {
     );
   }
   return (
-    <div style={{
-      display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
-      height: '100%',width:'100vw',padding:'0 50px',boxSizing:'border-box'}}>
+    <div className="component-container">
         <Helmet>
           <title>搜索结果 - {config.title}</title>
         </Helmet>

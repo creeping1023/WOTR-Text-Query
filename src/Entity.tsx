@@ -4,6 +4,9 @@ import { ContainerWithTitle, MultiLanguage, GetRelationJson, path2uuid, config }
 import { Helmet } from "react-helmet-async";
 
 function SplitedLongString(text:string){
+  if (window.innerWidth <= 480){
+    return <span>{text}</span>
+  }
   return text.split(/(?<=\/)|(?=\/)/).map((term, i)=><span key={i}>{term}</span>);
 }
 
@@ -40,9 +43,7 @@ function Entity() {
   }, [path]);
 
   return (
-    <div style={{
-      display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',
-      height: '100%',width:'100vw',padding:'0 50px',boxSizing:'border-box'}}>
+    <div className="component-container">
         <Helmet>
           <title>{path.replaceAll('~', '/')} - {config.title}</title>
         </Helmet>

@@ -22,7 +22,7 @@ export default function Main(){
           <Button shape="circle" icon={<GithubOutlined />} href="https://github.com/creeping1023/WOTR-Text-Query" target='_blank'/>
         </Tooltip>
       </Layout.Header>
-      <Layout.Content style={{ overflowY: 'auto',  overflowX: 'hidden' }} id="main-content">
+      <Layout.Content style={{ overflow: 'auto' }} id="main-content">
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/results' element={<Results/>}></Route>

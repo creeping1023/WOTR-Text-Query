@@ -45,6 +45,11 @@ strong{
 .break-inline>*{
   display: inline-block;
 }
+@media (max-width: 480px) {
+  .break-inline{
+    word-break: break-all;
+  }
+}
 audio{
   min-height: 50px;
 }
@@ -61,4 +66,23 @@ audio{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.component-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  padding: 0 50px;
+  box-sizing: border-box;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .component-container{
+    padding: 0 10px;
+  }
+  .ant-layout-header{
+    padding: 0 10px;
+  }
 }
