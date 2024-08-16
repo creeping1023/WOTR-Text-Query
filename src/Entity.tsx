@@ -12,15 +12,29 @@ function SplitedLongString(text:string){
 
 function DumpRelation(relationData:Record<string, string[]>|null){
   if (!relationData) return [];
-  return [['parents', '被引用'], ['children', '引用']].filter(([key, title])=>relationData[key]).map(([key, title], index) =>{
-    const list = relationData[key];
-    list.sort();
+  return [['referenced', '被引用'], ['referencing', '引用']].filter(([key, title])=>relationData[key]).map(([key, title], index) =>{
+    const map = {} as Record<string, string[]>;
+    const list = relationData[key]
+    list.filter(pair=>{
+      const key = pair[0].replaceAll(/\[\d+\]/g,'[]');
+      const val = pair[1];
+      if (!map[key]) map[key] = [];
+      map[key].push(val);
+    });
+    const keys = Array.from(Object.keys(map));
+    keys.sort();
+    const data = keys.map(key=>{return {key:key, list:map[key]};});
     return ContainerWithTitle(
       title,
-      list.map((path, i)=><p key={i}>
-        <Link to={'/entity/'+path.replaceAll('/','~')+'.jbp'} className='break-inline'>
-          {SplitedLongString(path.replaceAll('~', '/'))}
-        </Link>
+      data.map((pair, i)=><p key={i}>
+        <div>
+          {pair.key}
+        </div>
+        <div>
+          {pair.list.map(path => (<Link to={'/entity/'+path.replaceAll('/','~')+'.jbp'} className='break-inline'>
+            {SplitedLongString(path)}
+          </Link>))}
+        </div>
       </p>),
       index
     );
@@ -49,7 +63,7 @@ function Entity() {
         </Helmet>
         {path && <h2 className='break-inline'>{SplitedLongString(path.replaceAll('~', '/').replace(/\.jbp$/, ''))}</h2>}
         {path && (path2uuid[path.replaceAll('~', '/')] ?? []).map((id, index) => MultiLanguage(id, index))}
-        {path ? DumpRelation(relationData) : 'loading...'}
+        {path && (DumpRelation(relationData) ?? 'loading...')}
         {path && ContainerWithTitle(
           '原始数据',
           <Link to={'https://creeping1023.github.io/WOTR_BluePrint/'+path.replaceAll('~', '/').replace('.jbp', '.json')} className='break-inline' target="_blank">

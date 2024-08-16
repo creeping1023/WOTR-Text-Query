@@ -119,7 +119,7 @@ export function GetAudios(id:uuid){
 
 export async function GetRelationJson(path:string){
   if (!path) return null;
-  const url = 'https://creeping1023.github.io/WOTR-BluePrint-Relation/data/' + path.replace(/\.jbp$/, '.json');
+  const url = 'https://creeping1023.github.io/WOTR-BluePrint-Ref/' + path.replaceAll('~', '/').replace(/\.jbp$/, '.json');
   return (await fetch(url)).json();
 }
 
