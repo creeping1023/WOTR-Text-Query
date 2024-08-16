@@ -32,9 +32,11 @@ function Home() {
         <Helmet>
           <title>{config.title}</title>
         </Helmet>
-        <Input.TextArea placeholder="input search text" defaultValue={sharedState.search} onChange={handleChange} onKeyDown={handleKeyPress} allowClear autoFocus
-          size="large" autoSize={{ minRows: 1, maxRows: 6 }} style={{maxWidth:'800px'}} />
-        <Button type="primary" icon={<SearchOutlined />} onClick={submit} disabled={!sharedState.search}>查找</Button>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'center', height:'100%', gap: 10}}>
+          <Input.TextArea placeholder="input search text" defaultValue={sharedState.search} onChange={handleChange} onKeyDown={handleKeyPress} allowClear autoFocus
+            size="large" autoSize={{ minRows: 1, maxRows: 6 }} style={{maxWidth:'800px'}} />
+          <Button type="primary" icon={<SearchOutlined />} onClick={submit} disabled={!sharedState.search}>查找</Button>
+        </div>
     </div>
   );
 }

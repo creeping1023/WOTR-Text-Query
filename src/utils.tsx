@@ -107,7 +107,7 @@ export function GetAudios(id:uuid){
     const names = soundSwitch[eventName] ?? [eventName];
     // 这里的key必须是唯一的，以避免页面切换时音频不更新
     return names.map((name, index) => <p className='audio-container' key={name}>
-      <span>{name}</span>
+      <span style={{wordBreak: 'break-all'}}>{name}</span>
       <audio controls>
         <source src={'https://creeping1023.github.io/WOTR-Dialogues-Audio/dest/' + name + '.aac'} type="audio/aac" />
         Your browser does not support the audio element.
