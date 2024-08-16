@@ -93,27 +93,27 @@ const Results: React.FC = () => {
     let listHeight = sectionRef.current?.clientHeight || 0;
     let listWidth = sectionRef.current?.clientWidth || 0;
 
-    const handleResize = () => {
+    const handleResize = function(force:boolean = false){
       if (sectionRef.current) {
         const newHeight = sectionRef.current.clientHeight;
         const newWidth = sectionRef.current.clientWidth;
-        
-        if (newHeight !== listHeight) {
+
+        if (force || newHeight !== listHeight) {
           setListHeight(newHeight);
           listHeight = newHeight;
         }
   
-        if (newWidth !== listWidth) {
+        if (force || newWidth !== listWidth) {
           setItemHeights({});
           listWidth = newWidth;
         }
       }
     }; 
     
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    handleResize(true);
+    const binded = handleResize.bind(null, false);
+    window.addEventListener('resize', binded);
+    return () => window.removeEventListener('resize', binded);
   }, []);
 
   return (
