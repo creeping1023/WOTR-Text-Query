@@ -18,7 +18,7 @@ export default function Main(){
         <div style={{flexGrow:1, display: 'flex'}} >
           <SearchOnTop style={{maxWidth:'500px'}} />
         </div>
-        <Tooltip placement="bottom" title="Github">
+        <Tooltip placement="bottom" title={<div style={{display:'flex', flexDirection:'column', alignItems: 'center'}}><div>Github</div><div>给孩子点个star吧</div></div>}>
           <Button shape="circle" icon={<GithubOutlined />} href="https://github.com/creeping1023/WOTR-Text-Query" target='_blank'/>
         </Tooltip>
       </Layout.Header>
