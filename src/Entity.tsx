@@ -50,6 +50,12 @@ function Entity() {
         {path && <h2 className='break-inline'>{SplitedLongString(path.replaceAll('~', '/').replace(/\.jbp$/, ''))}</h2>}
         {path && (path2uuid[path.replaceAll('~', '/')] ?? []).map((id, index) => MultiLanguage(id, index))}
         {path ? DumpRelation(relationData) : 'loading...'}
+        {path && ContainerWithTitle(
+          '原始数据',
+          <Link to={'https://creeping1023.github.io/WOTR_BluePrint/'+path.replaceAll('~', '/').replace('.jbp', '.json')} className='break-inline' target="_blank">
+            {SplitedLongString(path.replaceAll('~', '/').replace('.jbp', '.json'))}
+          </Link>,
+        )}
     </div>
   );
 }
