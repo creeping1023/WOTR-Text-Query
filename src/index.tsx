@@ -8,6 +8,14 @@ import { HelmetProvider } from "react-helmet-async";
 import { ConfigProvider, ThemeConfig } from "antd";
 import Main from './Main';
 
+try { // check ES2018
+  const regex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+  const match = regex.exec('2018-01-01');
+  const year = match!.groups!.year;
+} catch (e) {
+  alert('浏览器版本过旧，部分功能可能无法正确生效');
+}
+
 const themeConfig:ThemeConfig = {
   hashed: false,
   token: {
