@@ -27,6 +27,12 @@ strong{
   display: block;
   text-decoration: none;
   color: #000;
+  margin: 5px 0;
+}
+@media (min-width: 481px) {
+  .result{
+    padding: 5px;
+  }
 }
 .result:hover{
   border-color: #000;
@@ -36,6 +42,7 @@ strong{
   display: flex;
   flex-direction: column;
   gap: 1em;
+  width: 100%;
 }
 .break-inline{
   display: flex;
