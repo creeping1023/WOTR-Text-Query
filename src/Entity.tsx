@@ -15,7 +15,7 @@ function DumpRelation(relationData:Record<string, string[]>|null){
   return [['referenced', '被引用'], ['referencing', '引用']].filter(([key, title])=>relationData[key]).map(([key, title], index) =>{
     const map = {} as Record<string, string[]>;
     const list = relationData[key]
-    list.filter(pair=>{
+    list.forEach(pair=>{
       const key = pair[0].replaceAll(/\[\d+\]/g,'[]');
       const val = pair[1];
       if (!map[key]) map[key] = [];
